@@ -21,7 +21,7 @@ export default function SearchBar() {
   return (
     <form className="grid grid-cols-1" onSubmit={handleSubmit}>
       <input
-        className="col-start-1 row-start-1 w-full rounded-md border border-zinc-200 px-4 py-2 shadow placeholder:text-zinc-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        className="border-border focus:ring-accent col-start-1 row-start-1 w-full rounded-md border px-4 py-2 shadow focus:ring-2 focus:outline-none"
         ref={inputRef}
         type="text"
         value={query}
@@ -29,7 +29,7 @@ export default function SearchBar() {
         placeholder="Search the web"
         autoFocus
       ></input>
-      <SearchIcon className="pointer-events-none col-start-1 row-start-1 mr-4 size-5 self-center justify-self-end text-zinc-400" />
+      <SearchIcon className="text-foreground-lighter pointer-events-none col-start-1 row-start-1 mr-4 size-5 self-center justify-self-end" />
     </form>
   );
 }

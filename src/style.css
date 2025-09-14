@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+:root {
+  --foreground: var(--color-zinc-50);
+  --foreground-light: var(--color-zinc-300);
+  --foreground-lighter: var(--color-zinc-400);
+  --background: var(--color-zinc-800);
+  --border: var(--color-zinc-600);
+  --accent: var(--color-indigo-500);
+}
+
+@theme inline {
+  --color-foreground: var(--foreground);
+  --color-foreground-light: var(--foreground-light);
+  --color-foreground-lighter: var(--foreground-lighter);
+  --color-background: var(--background);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground-light text-pretty antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground;
+  }
+
+  a,
+  button {
+    @apply cursor-pointer outline-hidden;
+  }
+
+  button:focus {
+    @apply outline-hidden;
+  }
+
+  button:disabled,
+  button[disabled] {
+    @apply cursor-not-allowed;
+  }
+
+  ::placeholder {
+    @apply text-foreground-lighter;
+  }
+}
