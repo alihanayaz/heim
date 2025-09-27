@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 :root {
   --foreground: var(--color-zinc-50);
@@ -18,9 +19,14 @@
   --color-accent: var(--accent);
 }
 
+@theme {
+  --font-sans: "Geist Sans", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
 @layer base {
   body {
-    @apply bg-background text-foreground-light text-pretty antialiased;
+    @apply bg-background text-foreground-light font-sans text-pretty antialiased;
   }
 
   h1,
