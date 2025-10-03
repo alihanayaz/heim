@@ -15,7 +15,7 @@ export default function Header() {
   const hours = now.getHours();
   const greeting = `Good ${hours < 12 ? "Morning" : hours < 18 ? "Afternoon" : "Evening"}, Alihan`;
   return (
-    <header className="mt-24 mb-8 flex flex-wrap-reverse justify-between gap-2">
+    <header className="mb-8 flex flex-wrap-reverse justify-between gap-2">
       <div className="flex flex-col gap-1">
         <h2 className="text-2xl md:text-3xl">{greeting}</h2>
         <div className="text-foreground-light text-xl md:text-2xl">
