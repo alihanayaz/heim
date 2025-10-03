@@ -8,6 +8,7 @@
   --background: var(--color-zinc-800);
   --border: var(--color-zinc-600);
   --accent: var(--color-indigo-500);
+  --destructive: var(--color-red-500);
 }
 
 @theme inline {
@@ -17,6 +18,7 @@
   --color-background: var(--background);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
 }
 
 @theme {
