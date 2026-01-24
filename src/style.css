@@ -20,6 +20,12 @@
   --color-destructive: var(--destructive);
 }
 
+@theme {
+  --breakpoint-xs: 30rem;
+  --text-tiny: 0.625rem;
+  --default-transition-duration: 300ms;
+}
+
 @layer base {
   body {
     @apply bg-background text-foreground text-base text-pretty antialiased;
@@ -37,6 +43,10 @@
   button:disabled,
   button[disabled] {
     @apply cursor-not-allowed;
+  }
+
+  hr {
+    @apply border-border h-0 w-full border-t;
   }
 
   ::placeholder {
