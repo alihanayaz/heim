@@ -50,7 +50,7 @@
   }
 
   hr {
-    @apply border-border h-0 w-full border-t;
+    @apply border-border h-0 w-full place-self-center border-t;
   }
 
   ::placeholder {
