@@ -1,6 +1,11 @@
 {
   "name": "heim",
   "private": true,
+  "author": {
+    "name": "Alihan Ayaz",
+    "email": "alihan@alihanayaz.com",
+    "url": "https://alihanayaz.com"
+  },
   "version": "0.0.0",
   "type": "module",
   "scripts": {
