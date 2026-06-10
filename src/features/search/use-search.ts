@@ -49,9 +49,7 @@ export function useSearch() {
     if (!value) return;
     const encodedQuery = encodeURIComponent(value);
     const searchUrl = `${SEARCH_BASE_URL}${encodedQuery}`;
-    window.open(searchUrl, "_blank");
-    setQuery("");
-    inputRef.current?.focus();
+    window.location.href = searchUrl;
   };
 
   return {
