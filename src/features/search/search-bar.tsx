@@ -1,6 +1,5 @@
 import { useSearch } from "./use-search";
 import { Button } from "@/components";
-import { cn } from "@/lib/utils";
 import { SearchIcon } from "lucide-react";
 
 export default function SearchBar() {
@@ -38,10 +37,8 @@ export default function SearchBar() {
               onClick={() => selectEngine(engine.id)}
               variant={isActive ? "active" : "ghost"}
               size="xs"
-              className={cn(
-                "px-3 text-sm",
-                !isActive && "text-foreground-subtle hover:text-foreground",
-              )}
+              tone={isActive ? "base" : "subtle"}
+              className="px-3"
             >
               {engine.name}
             </Button>

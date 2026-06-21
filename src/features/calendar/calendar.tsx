@@ -22,7 +22,12 @@ export default function Calendar() {
 
         <div className="flex items-center gap-2">
           {!isSameMonth(calendar.currentDate, calendar.initialDate) && (
-            <Button onClick={handleCalendar.reset} variant="ghost" size="icon">
+            <Button
+              onClick={handleCalendar.reset}
+              variant="ghost"
+              size="icon"
+              radius="full"
+            >
               <RotateCcwIcon className="size-5" />
             </Button>
           )}
@@ -31,7 +36,7 @@ export default function Calendar() {
               onClick={handleCalendar.prevMonth}
               variant="ghost"
               size="icon"
-              className="rounded-full"
+              radius="full"
             >
               <ChevronLeftIcon className="size-6" />
             </Button>
@@ -39,7 +44,7 @@ export default function Calendar() {
               onClick={handleCalendar.nextMonth}
               variant="ghost"
               size="icon"
-              className="rounded-full"
+              radius="full"
             >
               <ChevronRightIcon className="size-6" />
             </Button>

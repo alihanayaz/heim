@@ -1,7 +1,6 @@
 import { CLOCK_OPTIONS, useSettings } from "./settings-context";
 import { useSettingsPanel } from "./use-settings-panel";
 import { Button } from "@/components";
-import { cn } from "@/lib/utils";
 import { SettingsIcon, XIcon } from "lucide-react";
 
 export default function Settings() {
@@ -13,9 +12,10 @@ export default function Settings() {
       <Button
         variant="ghost"
         size="icon"
+        radius="full"
         onClick={open}
         aria-label="Open settings"
-        className="text-foreground-subtle hover:text-foreground fixed top-4 right-4 rounded-full"
+        className="text-foreground-subtle hover:text-foreground fixed top-4 right-4"
       >
         <SettingsIcon className="size-5" />
       </Button>
@@ -34,9 +34,9 @@ export default function Settings() {
               <Button
                 variant="ghost"
                 size="icon"
+                radius="full"
                 onClick={close}
                 aria-label="Close settings"
-                className="rounded-full"
               >
                 <XIcon className="size-5" />
               </Button>
@@ -66,13 +66,10 @@ export default function Settings() {
                       <Button
                         key={option.id}
                         onClick={() => update({ clockFormat: option.id })}
-                        variant={isActive ? "active" : "default"}
+                        variant={isActive ? "active" : "ghost"}
                         size="sm"
-                        className={cn(
-                          "flex-1 text-sm",
-                          !isActive &&
-                            "text-foreground-subtle hover:text-foreground",
-                        )}
+                        tone={isActive ? "base" : "subtle"}
+                        className="flex-1"
                       >
                         {option.label}
                       </Button>
