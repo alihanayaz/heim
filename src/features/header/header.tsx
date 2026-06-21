@@ -1,8 +1,11 @@
 import { useClock } from "./use-clock";
-import { APP_NAME, USER_NAME } from "@/lib/constants";
+import { APP_NAME } from "@/lib/constants";
+import { useSettings } from "@/features/settings";
 
 export default function Header() {
   const { time, seconds } = useClock();
+  const { settings } = useSettings();
+  const userName = settings.userName.trim();
   const now = new Date();
   const today = now.toLocaleDateString("en-US", {
     weekday: "long",
@@ -29,7 +32,13 @@ export default function Header() {
       </div>
 
       <h3 className="text-foreground-muted mt-6 text-3xl font-light">
-        Welcome back, <span className="font-medium">{USER_NAME}</span>.
+        Welcome back
+        {userName && (
+          <>
+            , <span className="font-medium">{userName}</span>
+          </>
+        )}
+        .
       </h3>
 
       <hr className="my-12 w-12" />
