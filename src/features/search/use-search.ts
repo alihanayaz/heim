@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocalStorage } from "@/lib/use-local-storage";
+import { useLocalStorage } from "@/lib/utils";
 
 export const SEARCH_ENGINES = [
   { id: "google", name: "Google", baseUrl: "https://www.google.com/search?q=" },

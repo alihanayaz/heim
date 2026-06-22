@@ -6,7 +6,7 @@ import {
   type Settings,
   type SettingsContextValue,
 } from "./settings-context";
-import { useLocalStorage } from "@/lib/use-local-storage";
+import { useLocalStorage } from "@/lib/utils";
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [stored, setStored] = useLocalStorage<Settings>(
