@@ -1,6 +1,7 @@
 import { Settings } from "@/features/settings";
 import { Header } from "@/features/header";
 import { SearchBar } from "@/features/search";
+import { Shortcuts } from "@/features/shortcuts";
 import { Calendar } from "@/features/calendar";
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
       <Settings />
       <Header />
       <SearchBar />
+      <Shortcuts />
       <Calendar />
     </div>
   );

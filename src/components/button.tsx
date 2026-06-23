@@ -11,6 +11,7 @@ const buttonVariants = cva(
         active: "bg-accent hover:bg-accent-hover",
         ghost: "hover:bg-border bg-transparent",
         destructive: "bg-destructive hover:bg-destructive-hover",
+        outline: "border-border hover:border-accent border bg-transparent",
         plain: "bg-transparent",
       },
       size: {
@@ -19,6 +20,7 @@ const buttonVariants = cva(
         md: "px-4 py-2",
         lg: "px-8 py-2",
         icon: "aspect-square size-10",
+        iconSm: "aspect-square size-5",
       },
       radius: {
         none: "rounded-none",
