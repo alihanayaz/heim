@@ -1,6 +1,6 @@
 import { CLOCK_OPTIONS, useSettings } from "./settings-context";
 import { useSettingsPanel } from "./use-settings-panel";
-import { Button } from "@/components";
+import { Button, Input } from "@/components";
 import { SettingsIcon, XIcon } from "lucide-react";
 
 export default function Settings() {
@@ -47,11 +47,10 @@ export default function Settings() {
                 <span className="text-foreground-subtle text-xs font-semibold tracking-widest uppercase">
                   Your name
                 </span>
-                <input
+                <Input
                   value={settings.userName}
                   onChange={(e) => update({ userName: e.target.value })}
                   placeholder="Name"
-                  className="border-border hover:border-accent focus:ring-accent h-10 w-full rounded-md border px-4 py-2 text-base transition-colors focus:ring-2 focus:outline-none"
                 />
               </label>
 
