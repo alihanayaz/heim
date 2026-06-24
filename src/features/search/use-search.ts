@@ -1,20 +1,63 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "@/lib/utils";
 
+export type SearchEngineCategory = "engine" | "platform";
+
+export interface SearchEngine {
+  id: string;
+  name: string;
+  baseUrl: string;
+  category: SearchEngineCategory;
+}
+
 export const SEARCH_ENGINES = [
-  { id: "google", name: "Google", baseUrl: "https://www.google.com/search?q=" },
+  // Search Engines
+  {
+    id: "google",
+    name: "Google",
+    baseUrl: "https://www.google.com/search?q=",
+    category: "engine",
+  },
+  {
+    id: "bing",
+    name: "Bing",
+    baseUrl: "https://www.bing.com/search?q=",
+    category: "engine",
+  },
   {
     id: "duckduckgo",
     name: "DuckDuckGo",
     baseUrl: "https://duckduckgo.com/?q=",
+    category: "engine",
   },
-] as const;
 
-export type SearchEngineId = (typeof SEARCH_ENGINES)[number]["id"];
+  // Platforms
+  {
+    id: "youtube",
+    name: "YouTube",
+    baseUrl: "https://www.youtube.com/results?search_query=",
+    category: "platform",
+  },
+  {
+    id: "wikipedia",
+    name: "Wikipedia",
+    baseUrl: "https://en.wikipedia.org/w/index.php?search=",
+    category: "platform",
+  },
+  {
+    id: "reddit",
+    name: "Reddit",
+    baseUrl: "https://www.reddit.com/search/?q=",
+    category: "platform",
+  },
+] as const satisfies readonly SearchEngine[];
+
+export type SearchEngineEntry = (typeof SEARCH_ENGINES)[number];
+export type SearchEngineId = SearchEngineEntry["id"];
 
 const ENGINE_STORAGE_KEY = "heim:search-engine";
 
-const BLOCKED_KEYS = new Set([
+const FOCUS_IGNORED_KEYS = new Set([
   " ",
   "Enter",
   "Tab",
@@ -43,40 +86,71 @@ export function useSearch() {
     ENGINE_STORAGE_KEY,
     SEARCH_ENGINES[0].id,
   );
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const engine =
-    SEARCH_ENGINES.find((e) => e.id === engineId) ?? SEARCH_ENGINES[0];
+  const activeEngine =
+    SEARCH_ENGINES.find((engine) => engine.id === engineId) ??
+    SEARCH_ENGINES[0];
 
-  const selectEngine = (id: SearchEngineId) => setEngineId(id);
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey || e.metaKey || e.altKey || BLOCKED_KEYS.has(e.key)) return;
-      if (document.activeElement !== inputRef.current) {
-        inputRef.current?.focus();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const selectEngine = (nextEngineId: SearchEngineId) => {
+    setEngineId(nextEngineId);
+    setIsMenuOpen(false);
+    inputRef.current?.focus();
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const value = query.trim();
     if (!value) return;
     const encodedQuery = encodeURIComponent(value);
-    const searchUrl = `${engine.baseUrl}${encodedQuery}`;
+    const searchUrl = `${activeEngine.baseUrl}${encodedQuery}`;
     window.location.href = searchUrl;
   };
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handlePointerDown = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) closeMenu();
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey || FOCUS_IGNORED_KEYS.has(e.key))
+        return;
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("input, textarea, select, [contenteditable]")) return;
+      inputRef.current?.focus();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return {
+    containerRef,
     inputRef,
     query,
     setQuery,
     handleSubmit,
     engines: SEARCH_ENGINES,
-    engineId,
+    activeEngine,
     selectEngine,
+    isMenuOpen,
+    toggleMenu,
   };
 }
