@@ -22,9 +22,9 @@ export default function Header() {
       </div>
 
       <div className="group relative flex items-baseline justify-center">
-        <h2 className="text-8xl font-bold tracking-tighter">{time}</h2>
+        <h2 className="text-8xl font-bold tracking-tight">{time}</h2>
 
-        <div className="max-w-0 opacity-0 transition-all ease-in-out group-hover:ml-4 group-hover:max-w-32 group-hover:opacity-100">
+        <div className="hidden sm:block max-w-0 opacity-0 transition-all ease-in-out group-hover:ml-4 group-hover:max-w-32 group-hover:opacity-100">
           <span className="text-foreground-muted text-5xl font-extralight tabular-nums">
             {seconds}
           </span>
